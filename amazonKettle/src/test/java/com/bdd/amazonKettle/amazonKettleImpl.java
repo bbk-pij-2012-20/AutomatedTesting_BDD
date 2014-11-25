@@ -5,12 +5,53 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class amazonKettleImpl {
+import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
 
+import org.junit.*;
+
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+
+public class amazonKettleImpl {
+	
+	private WebDriver driver;
+	private String baseUrl;
+	private boolean acceptNextAlert = true;
+	private StringBuffer verificationErrors = new StringBuffer();
+
+	@Before
+	public void setUp() throws Exception {
+		
+		driver = new FirefoxDriver();
+		baseUrl = "https://www.amazon.co.uk/";
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		
+		driver.quit();
+		String verificationErrorString = verificationErrors.toString();
+	    
+		if (!"".equals(verificationErrorString)) {
+	    
+			fail(verificationErrorString);
+	    
+		}
+	}
+	
 	@Given("^the page is open at Amazon UK’s home page$")
 	public void the_page_is_open_at_Amazon_UK_s_home_page() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	  
+		driver.get(baseUrl);
+	    
 	}
 
 	@Given("^I already have an account with Amazon UK$")
@@ -21,14 +62,16 @@ public class amazonKettleImpl {
 
 	@When("^I am on “www.amazon.co.uk”$")
 	public void I_am_on_www_amazon_co_uk() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+
+		driver.get(baseUrl + "/ap/signin?_encoding=UTF8&openid.assoc_handle=gbflex&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.ns.pape=http%3A%2F%2Fspecs.openid.net%2Fextensions%2Fpape%2F1.0&openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.co.uk%2Fgp%2Fyourstore%2Fhome%3Fie%3DUTF8%26action%3Dsign-out%26path%3D%252Fgp%252Fyourstore%252Fhome%26ref_%3Dnav_gno_signout%26signIn%3D1%26useRedirectOnSuccess%3D1");
+	
 	}
 
 	@When("^I fill “My e-mail address is:” with “shahinzibaee@gmail.com”$")
 	public void I_fill_My_e_mail_address_is_with_shahinzibaee_gmail_com() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	
+		driver.findElement(By.name("email")).sendKeys("shahinzibaee@gmail.com");
+		
 	}
 
 	@When("^I fill \"([^\"]*)\" with “magicword”$")
