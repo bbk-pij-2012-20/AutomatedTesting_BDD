@@ -47,13 +47,15 @@ public class amazonKettleImpl {
 		}
 	}
 	
+	
 	@Given("^the page is open at Amazon UK’s home page$")
 	public void the_page_is_open_at_Amazon_UK_s_home_page() throws Throwable {
 	  
 		driver.get(baseUrl);
 	    
 	}
-
+	
+	//not sure how to implement this Given
 	@Given("^I already have an account with Amazon UK$")
 	public void I_already_have_an_account_with_Amazon_UK() throws Throwable {
 	    // Express the Regexp above with the code you wish you had
@@ -70,20 +72,24 @@ public class amazonKettleImpl {
 	@When("^I fill “My e-mail address is:” with “shahinzibaee@gmail.com”$")
 	public void I_fill_My_e_mail_address_is_with_shahinzibaee_gmail_com() throws Throwable {
 	
-		driver.findElement(By.name("email")).sendKeys("shahinzibaee@gmail.com");
+	    driver.findElement(By.id("ap_email")).clear();
+	    driver.findElement(By.name("email")).sendKeys("shahinzibaee@gmail.com");
 		
 	}
 
 	@When("^I fill \"([^\"]*)\" with “magicword”$")
 	public void I_fill_with_magicword(String arg1) throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	
+		driver.findElement(By.id("ap_password")).clear();
+	    driver.findElement(By.id("ap_password")).sendKeys("...");
+
 	}
 
 	@When("^I click button labelled “Sign in using our secure server”$")
 	public void I_click_button_labelled_Sign_in_using_our_secure_server() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	
+		driver.findElement(By.id("signInSubmit-input")).click();
+
 	}
 
 	@Then("^“Your Account” page opens$")
@@ -94,34 +100,45 @@ public class amazonKettleImpl {
 
 	@Then("^I am logged in$")
 	public void I_am_logged_in() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+
+		Assert.assertEquals("Amazon.co.uk: Recommended For You",driver.getTitle());
+	    
 	}
 
-	@When("^I fill “My e-mail address is:” with “szib@gmail.com”$")
-	public void I_fill_My_e_mail_address_is_with_szib_gmail_com() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
-	}
+	//This time testing for outcome of wrong email/password
+	@When("^I fill “My e-mail address is:” with “wrongAddress”$")
+	public void I_fill_My_e_mail_address_is_with_wrong_Address() throws Throwable {
+	
+		driver.findElement(By.id("ap_email")).clear();
+	    driver.findElement(By.name("email")).sendKeys("wrongAddress");
 
-	@When("^I fill \"([^\"]*)\" with “wrongword”$")
+	}
+	
+	//not sure if its possible to include an 'OR' when
+	@When("^I fill \"([^\"]*)\" with “wrongPassword”$")
 	public void I_fill_with_wrongword(String arg1) throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	
+		driver.findElement(By.id("ap_password")).clear();
+	    driver.findElement(By.id("ap_password")).sendKeys("wrongPasword");
+
+	}
+	
+	@When("^I click button labelled “Sign in using our secure server”$")
+	public void I_click_button_labelled_Sign_in_using_our_secure_server_wrongWord() throws Throwable {
+	
+		driver.findElement(By.id("signInSubmit-input")).click();
+
 	}
 
 	@Then("^login fails$")
 	public void login_fails() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+		
+		assertEquals("There was a problem with your request", driver.findElement(By.cssSelector("h6")).getText());
+	
 	}
 
-	@Then("^sign in page includes message “There was a problem with your request.”$")
-	public void sign_in_page_includes_message_There_was_a_problem_with_your_request_() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
-	}
-
+	
+	
 	@Given("^the page is open at Amazon UK’s “Your Account”$")
 	public void the_page_is_open_at_Amazon_UK_s_Your_Account() throws Throwable {
 	    // Express the Regexp above with the code you wish you had
@@ -142,14 +159,17 @@ public class amazonKettleImpl {
 
 	@When("^I enter: “kettle” into “Search” bar$")
 	public void I_enter_kettle_into_Search_bar() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	   
+		driver.findElement(By.id("twotabsearchtextbox")).clear();
+	    driver.findElement(By.id("twotabsearchtextbox")).sendKeys("kettle");
+
 	}
 
 	@When("^I click button labelled “go” or press return$")
 	public void I_click_button_labelled_go_or_press_return() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	
+		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
+
 	}
 
 	@Then("^“results for “kettle”” page is open$")
@@ -164,28 +184,30 @@ public class amazonKettleImpl {
 	    throw new PendingException();
 	}
 
-	@When("^I click on kettle description “Russell Hobbs (\\d+) Colours Kettle - Cream”$")
-	public void I_click_on_kettle_description_Russell_Hobbs_Colours_Kettle_Cream(int arg1) throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	@When("^I click on 5th kettle on list$")
+	public void I_click_on_5th_kettle_on_list() throws Throwable {
+	
+		driver.findElement(By.xpath("//li[@id='result_5']/div/div/div/div[2]/div/a/h2")).click();
+	
 	}
 
 	@Then("^page for this kettle opens including button “Add to Basket”$")
 	public void page_for_this_kettle_opens_including_button_Add_to_Basket() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	
+
 	}
 
-	@Given("^the page is open at Amazon UK’s Russell Hobbs (\\d+) kettle$")
-	public void the_page_is_open_at_Amazon_UK_s_Russell_Hobbs_kettle(int arg1) throws Throwable {
+	@Given("^the page is open at Amazon UK’s Russell Hobbs kettle$")
+	public void the_page_is_open_at_Amazon_UK_s_Russell_Hobbs_kettle() throws Throwable {
 	    // Express the Regexp above with the code you wish you had
 	    throw new PendingException();
 	}
 
 	@When("^I click on the  button “Add to Basket”$")
 	public void I_click_on_the_button_Add_to_Basket() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	
+		driver.findElement(By.id("add-to-cart-button")).click();
+
 	}
 
 	@Then("^page for purchasing this kettle opens with “(\\d+) item was added to your basket”$")
@@ -208,8 +230,9 @@ public class amazonKettleImpl {
 
 	@When("^I click on the button “Edit your Basket”$")
 	public void I_click_on_the_button_Edit_your_Basket() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+
+	    driver.findElement(By.id("a-autoid-0-announce")).click();
+	    
 	}
 
 	@Then("^“Shopping Basket” page opens$")
@@ -226,8 +249,9 @@ public class amazonKettleImpl {
 
 	@When("^I click on the button “Proceed to Checkout”$")
 	public void I_click_on_the_button_Proceed_to_Checkout() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	
+		driver.findElement(By.name("proceedToCheckout")).click();
+	    
 	}
 
 	@Then("^“Review your order” page opens$")
