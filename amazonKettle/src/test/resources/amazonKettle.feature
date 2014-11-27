@@ -17,8 +17,8 @@ Feature: open Amazon UK's home page
 		Given the page is open at Amazon UK’s home page
 			And I already have an account with Amazon UK 
 		When I click button “Hello, Sign in Your Account” 
-			And I fill “My e-mail address is:” with “szib@gmail.com”
-			And I fill "Yes, I have a password:" with “wrongword”
+			And I fill “My e-mail address is:” with “wrongEmail”
+			And I fill "Yes, I have a password:" with “wrongPassword”
 			And I click button labelled “Sign in using our secure server”
 		Then login fails 
 			And sign in page includes message “There was a problem with your request.” 
@@ -33,11 +33,11 @@ Feature: open Amazon UK's home page
 	Scenario: I add 6th kettle from search results
 		Given the page is open at search results for “kettle”
 			And I am logged in to my account		
-		When I click on kettle description “Russell Hobbs 18943 Colours Kettle - Cream”
+		When I click on 6th kettle
 		Then page for this kettle opens including button “Add to Basket”
 
 	Scenario: I add the selected kettle to my basket
-		Given the page is open at Amazon UK’s Russell Hobbs 18943 kettle
+		Given the page is open at Amazon UK’s 6th kettle
 			And I am logged in to my account		
 		When I click on the  button “Add to Basket”
 		Then page for purchasing this kettle opens with “1 item was added to your basket”
