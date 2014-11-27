@@ -6,7 +6,7 @@ Feature: open Amazon UK's home page
 	Scenario: I find Amazon UK’s sign in page and sign in correctly
 		Given the page is open at Amazon UK’s home page
 			And I already have an account with Amazon UK 
-		When I am on “www.amazon.co.uk”
+		When I click button “Hello, Sign in Your Account” 
 			And I fill “My e-mail address is:” with “shahinzibaee@gmail.com”
 			And I fill "Yes, I have a password:" with “magicword”
 			And I click button labelled “Sign in using our secure server”
@@ -15,7 +15,8 @@ Feature: open Amazon UK's home page
 
 	Scenario: I find Amazon UK’s sign in form and sign in incorrectly
 		Given the page is open at Amazon UK’s home page
-		When I am on “www.amazon.co.uk”
+			And I already have an account with Amazon UK 
+		When I click button “Hello, Sign in Your Account” 
 			And I fill “My e-mail address is:” with “szib@gmail.com”
 			And I fill "Yes, I have a password:" with “wrongword”
 			And I click button labelled “Sign in using our secure server”
@@ -25,8 +26,7 @@ Feature: open Amazon UK's home page
 	Scenario: I search for kettles and pick the 6th in the list
 		Given the page is open at Amazon UK’s “Your Account”
 			And I am logged in to my account
-		When I am on “www.amazon.co.uk/…”
-			And I enter: “kettle” into “Search” bar
+		When I enter: “kettle” into “Search” bar
 			And I click button labelled “go” or press return
 		Then “results for “kettle”” page is open
 
